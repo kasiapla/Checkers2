@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Square currentSquare;
+    private BoardController board;
+
     void Start()
     {
-        
+        board = BoardController.instance;
+        currentSquare = board.GetClosestSquare(this);
+        name = currentSquare?.name;
     }
 
     // Update is called once per frame
@@ -15,4 +19,7 @@ public class Checker : MonoBehaviour
     {
         
     }
+
+
 }
+

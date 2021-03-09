@@ -22,15 +22,4 @@ public class Square : MonoBehaviour
     [SerializeField] private SquareStatus status;
     [SerializeField] private Square[] upperSquares;
     [SerializeField] private Square[] lowerSquares;
-    
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
 }

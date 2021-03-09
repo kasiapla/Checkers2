@@ -1953,8 +1953,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ba0a921b1464e29b314a444d35e45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particle: {fileID: 6087610612420167023, guid: 2d1686ecccd384bd49333326d0ed072e,
-    type: 3}
 --- !u!4 &494824897
 Transform:
   m_ObjectHideFlags: 0
@@ -6089,6 +6087,7 @@ GameObject:
   - component: {fileID: 1697230872}
   - component: {fileID: 1697230871}
   - component: {fileID: 1697230870}
+  - component: {fileID: 1697230874}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -6174,6 +6173,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1697230874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697230869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 818a22cb815c3f04d84da00e6d09d6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _board: {fileID: 62040194}
 --- !u!1 &1719169780
 GameObject:
   m_ObjectHideFlags: 0
@@ -6720,7 +6732,7 @@ PrefabInstance:
     - target: {fileID: 2001614875218798082, guid: 2d1686ecccd384bd49333326d0ed072e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2001614875218798082, guid: 2d1686ecccd384bd49333326d0ed072e,
         type: 3}
