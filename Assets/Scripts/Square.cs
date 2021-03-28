@@ -18,8 +18,8 @@ public enum SquareStatus
 
 public class Square : MonoBehaviour
 {
-    [SerializeField] private SquareOccupation occupation;
-    [SerializeField] private SquareStatus status;
-    [SerializeField] private Square[] upperSquares;
-    [SerializeField] private Square[] lowerSquares;
+    [SerializeField] public SquareOccupation occupation { get; }
+    [SerializeField] public SquareStatus status { get; }
+    [SerializeField] public Square[] upperSquares { get; }
+    [SerializeField] public Square[] lowerSquares { get; }
 }

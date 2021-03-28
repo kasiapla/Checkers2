@@ -49,4 +49,52 @@ public class BoardController : MonoBehaviour
         }
         return resultSquare;
     }
+
+    void ClickSquare()
+    {
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            for (int i = 0; i < _squares.Count; i++)
+            {
+
+            }
+        }
+
+    }
+
+    void DisplayPossibleMoves(Square clickedSquare)
+    {
+        if (clickedSquare == null) return;
+        List<Square> possibleMoves = new List<Square>();
+        switch (clickedSquare.occupation)
+            {
+                case SquareOccupation.Free:
+                    break;
+                case SquareOccupation.WhiteCheckerOn:
+                    possibleMoves = CheckPossibleMoves(clickedSquare.upperSquares);
+                break;
+                case SquareOccupation.BlackCheckerOn:
+                    possibleMoves = CheckPossibleMoves(clickedSquare.lowerSquares);
+                break;
+                default:
+                    break;
+            }
+        for (int i = 0; i < possibleMoves?.Count; i++)
+        {
+            //tu bedzie zmiana koloru jak wymysle jak ja zrobić
+        }
+    }
+        
+    List<Square> CheckPossibleMoves(Square[] squaresToCheck)
+    {
+        List<Square> possibleMoves = new List<Square>();
+        for (int i = 0; i < squaresToCheck.Length; i++)
+        {
+            Square currentSquare = squaresToCheck[i];
+            if (currentSquare == null) continue;
+            if (currentSquare.occupation == SquareOccupation.Free) possibleMoves.Add(currentSquare);
+        }
+        return possibleMoves;
+    }
 }
