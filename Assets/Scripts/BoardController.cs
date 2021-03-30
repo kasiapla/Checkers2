@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardController : MonoBehaviour
+public class BoardController : MonoBehaviour, IEventSystemUser
 {
     [SerializeField] Transform _board;
     public static BoardController instance;
     List<Square> _squares = new List<Square>();
 
+
     private void Awake()
     {
+        GameEventSystem.RegisterUser(this);
         instance = this;
         if (_board == null) return;
 
@@ -42,59 +44,30 @@ public class BoardController : MonoBehaviour
             if (currentSquare == null) continue;
             Vector3 squarePosition = currentSquare.transform.position;
             float distance = Vector3.Distance(checkerPosition, squarePosition);
-            if (distance < smallestDistance) { 
+            if (distance < smallestDistance)
+            {
                 smallestDistance = distance;
-                resultSquare = currentSquare;            
+                resultSquare = currentSquare;
             }
         }
         return resultSquare;
     }
 
-    void ClickSquare()
+    void Update()
     {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            for (int i = 0; i < _squares.Count; i++)
-            {
-
-            }
+            GameEventSystem.RiseEvent(GameEventType.DisplayPossibleMovesLeftClick, _squares[1]);
         }
 
+        if (Input.GetButtonDown("Fire2"))
+        {
+            GameEventSystem.RiseEvent(GameEventType.DisplayPossibleMovesRightClick, _squares[3]);
+        }
     }
 
-    void DisplayPossibleMoves(Square clickedSquare)
+    public void OnGameEvent(GameEventType type, object obj)
     {
-        if (clickedSquare == null) return;
-        List<Square> possibleMoves = new List<Square>();
-        switch (clickedSquare.occupation)
-            {
-                case SquareOccupation.Free:
-                    break;
-                case SquareOccupation.WhiteCheckerOn:
-                    possibleMoves = CheckPossibleMoves(clickedSquare.upperSquares);
-                break;
-                case SquareOccupation.BlackCheckerOn:
-                    possibleMoves = CheckPossibleMoves(clickedSquare.lowerSquares);
-                break;
-                default:
-                    break;
-            }
-        for (int i = 0; i < possibleMoves?.Count; i++)
-        {
-            //tu bedzie zmiana koloru jak wymysle jak ja zrobić
-        }
-    }
-        
-    List<Square> CheckPossibleMoves(Square[] squaresToCheck)
-    {
-        List<Square> possibleMoves = new List<Square>();
-        for (int i = 0; i < squaresToCheck.Length; i++)
-        {
-            Square currentSquare = squaresToCheck[i];
-            if (currentSquare == null) continue;
-            if (currentSquare.occupation == SquareOccupation.Free) possibleMoves.Add(currentSquare);
-        }
-        return possibleMoves;
     }
 }

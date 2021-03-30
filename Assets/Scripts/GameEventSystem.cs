@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum GameEventType
+{
+    DisplayPossibleMovesLeftClick,
+    DisplayPossibleMovesRightClick,
+    HighlightPossibleMovesChangeState,
+}
+public interface IEventSystemUser {
+    void OnGameEvent(GameEventType type, object parameter);
+}
+
+
+public static class GameEventSystem
+{
+    static List<IEventSystemUser> users = new List<IEventSystemUser>();
+
+    public static void RegisterUser(IEventSystemUser possibleMoves)
+    {
+        users.Add(possibleMoves);
+    }
+
+    public static void RiseEvent(GameEventType type, object parameter)
+    {
+        for (int i = 0; i < users.Count; i++)
+        {
+            users[i].OnGameEvent(type, parameter);
+        }
+    }
+}
