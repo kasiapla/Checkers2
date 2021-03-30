@@ -6,6 +6,7 @@ public class Checker : MonoBehaviour
 {
     private Square currentSquare;
     private BoardController board;
+    private bool isQueen = false;
 
     void Start()
     {
