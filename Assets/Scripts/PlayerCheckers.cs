@@ -18,9 +18,5 @@ public class PlayerCheckers : MonoBehaviour
             blackCheckers.Add(_blackCheckers.GetChild(i).GetComponent<Checker>());
             whiteCheckers.Add(_whiteCheckers.GetChild(i).GetComponent<Checker>());
         }
-
-        Debug.Log("black checkers amount: " + blackCheckers.Count);
-        Debug.Log("white checkers amount: " + whiteCheckers.Count);
     }
-
 }

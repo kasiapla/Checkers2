@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ClickableSquare
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Squares
   - Water
   - UI
   - 

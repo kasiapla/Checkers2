@@ -1,28 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HumanPlayerController : MonoBehaviour
 {
-    // public GameObject particle;
-    private Checker[] checker;
+    [SerializeField] LayerMask _layerSquares;
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        ClickSquare();
+        EndTurn();
+    }
+
+    public void ClickSquare()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            /*if (Physics.Raycast(ray,out RaycastHit hitInfo))
-                Instantiate(particle, hitInfo.point, transform.rotation);*/
-        }
-
-        {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                GameEventSystem.RiseEvent(GameEventType.HighlightPossibleMovesChangeState, null);
+                GameEventSystem.RiseEvent(GameEventType.ClearHighlight);
+                if (hit.transform.gameObject.layer == _layerSquares)
+                {
+                    GameEventSystem.RiseEvent(GameEventType.DisplayPossibleMoves, hit.collider?.GetComponent<Square>());
+                }
             }
-
         }
+    }
 
+    public void EndTurn()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) GameEventSystem.RiseEvent(GameEventType.ChangePlayerTurn);
     }
 }
+
+

@@ -18,25 +18,46 @@ public enum SquareStatus
 
 public class Square : MonoBehaviour
 {
-    [SerializeField] public SquareOccupation occupation { get; }
-    [SerializeField] public SquareStatus status { get; }
-    [SerializeField] public Square[] upperSquares { get; }
-    [SerializeField] public Square[] lowerSquares { get; }
+    [SerializeField] private SquareOccupation occupation;
+    [SerializeField] private SquareStatus status;
+    [SerializeField] private Square[] upperSquares;
+    [SerializeField] private Square[] lowerSquares;
     [SerializeField] private Material material1;
     [SerializeField] private Material material2;
-    [SerializeField] private Material material3;
     [SerializeField] private MeshRenderer mesh;
 
+    public SquareOccupation Occupation
+    {
+        get { return occupation; }
+    }
+
+    public Square[] UpperSquares
+    {
+        get { return upperSquares; }
+    }
+
+    public Square[] LowerSquares
+    {
+        get { return lowerSquares; }
+    }
     public void ChangeSquareColor()
     {
-        if (mesh.material.name.Contains(material1.name)) mesh.material = material2;
-        else mesh.material = material1;
+        mesh.material = material2;
     }
 
-    public void ChangeSquareColor2()
+    public void TurnHighlightOff()
     {
-        if (mesh.material.name.Contains(material1.name)) mesh.material = material3;
-        else mesh.material = material1;
+        mesh.material = material1;
+    }
+
+    public void CheckForChecker()
+    {
+        switch (occupation)
+        {
+            case SquareOccupation.WhiteCheckerOn:
+                break;
+            case SquareOccupation.BlackCheckerOn:
+                break;
+        }
     }
 }
-

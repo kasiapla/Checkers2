@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HighlightPossibleMoves : MonoBehaviour, IEventSystemUser
 {
+    List<Square> _highlightedSquares;
+
     void Awake()
     {
         GameEventSystem.RegisterUser(this);
@@ -13,77 +15,69 @@ public class HighlightPossibleMoves : MonoBehaviour, IEventSystemUser
     {
         switch (type)
         {
-            case GameEventType.DisplayPossibleMovesLeftClick:
+            case GameEventType.DisplayPossibleMoves:
                 DisplayPossibleMoves((Square)obj);
                 break;
-            case GameEventType.DisplayPossibleMovesRightClick:
-                DisplayPossibleMoves2(obj as Square);
-                break;
-            case GameEventType.HighlightPossibleMovesChangeState:
-                enabled = !enabled;
+            case GameEventType.ClearHighlight:
+            case GameEventType.ChangePlayerTurn:
+                ClearHighlights();
                 break;
         }
     }
 
     public void DisplayPossibleMoves(Square clickedSquare)
     {
-        if (clickedSquare == null) return;
-        List<Square> possibleMoves = new List<Square>();
-        switch (clickedSquare.occupation)
-        {
-            case SquareOccupation.Free:
-                break;
-            case SquareOccupation.WhiteCheckerOn:
-                possibleMoves = CheckPossibleMoves(clickedSquare.upperSquares);
-                break;
-            case SquareOccupation.BlackCheckerOn:
-                possibleMoves = CheckPossibleMoves(clickedSquare.lowerSquares);
-                break;
-            default:
-                break;
-        }
-        for (int i = 0; i < possibleMoves?.Count; i++)
-        {
-            possibleMoves[i].ChangeSquareColor();
-        }
-
-        clickedSquare.ChangeSquareColor();
+        ClearHighlights();
+        CalculatePossibleMoves(clickedSquare);
+        HighlightSquares();
     }
 
     List<Square> CheckPossibleMoves(Square[] squaresToCheck)
     {
         List<Square> possibleMoves = new List<Square>();
-        for (int i = 0; i < squaresToCheck.Length; i++)
+        for (int i = 0; i < squaresToCheck?.Length; i++)
         {
             Square currentSquare = squaresToCheck[i];
             if (currentSquare == null) continue;
-            if (currentSquare.occupation == SquareOccupation.Free) possibleMoves.Add(currentSquare);
+            if (currentSquare.Occupation == SquareOccupation.Free) possibleMoves.Add(currentSquare);
         }
         return possibleMoves;
     }
 
-    public void DisplayPossibleMoves2(Square clickedSquare)
+    void ClearHighlights()
+    {
+        for (int i = 0; i < _highlightedSquares?.Count; i++)
+        {
+            _highlightedSquares[i]?.TurnHighlightOff();
+        }
+        _highlightedSquares = null;
+    }
+
+    void CalculatePossibleMoves(Square clickedSquare)
     {
         if (clickedSquare == null) return;
-        List<Square> possibleMoves = new List<Square>();
-        switch (clickedSquare.occupation)
+        switch (clickedSquare.Occupation)
         {
             case SquareOccupation.Free:
                 break;
             case SquareOccupation.WhiteCheckerOn:
-                possibleMoves = CheckPossibleMoves(clickedSquare.upperSquares);
+                if(GameFlow.PlayerTurn == PlayerTurn.PlayerOne)
+                _highlightedSquares = CheckPossibleMoves(clickedSquare.UpperSquares);
                 break;
             case SquareOccupation.BlackCheckerOn:
-                possibleMoves = CheckPossibleMoves(clickedSquare.lowerSquares);
+                if (GameFlow.PlayerTurn == PlayerTurn.PlayerTwo)
+                    _highlightedSquares = CheckPossibleMoves(clickedSquare.LowerSquares);
                 break;
             default:
                 break;
         }
-        for (int i = 0; i < possibleMoves?.Count; i++)
-        {
-            possibleMoves[i].ChangeSquareColor2();
-        }
+    }
 
-        clickedSquare.ChangeSquareColor2();
+    void HighlightSquares()
+    {
+        for (int i = 0; i < _highlightedSquares?.Count; i++)
+        {
+            _highlightedSquares[i]?.ChangeSquareColor();
+        }
     }
 }

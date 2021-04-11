@@ -15,11 +15,6 @@ public class Checker : MonoBehaviour
         name = currentSquare?.name;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 }
 

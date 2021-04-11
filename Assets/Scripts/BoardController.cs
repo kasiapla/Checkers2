@@ -6,8 +6,7 @@ public class BoardController : MonoBehaviour, IEventSystemUser
 {
     [SerializeField] Transform _board;
     public static BoardController instance;
-    List<Square> _squares = new List<Square>();
-
+    public List<Square> _squares = new List<Square>();
 
     private void Awake()
     {
@@ -26,9 +25,6 @@ public class BoardController : MonoBehaviour, IEventSystemUser
                 _squares.Add(square.GetComponent<Square>());
             }
         }
-
-        Debug.Log("squares number: " + _squares.Count);
-        Debug.Log("square 6" + _squares[5].gameObject.name);
     }
 
     public Square GetClosestSquare(Checker checker)
@@ -55,19 +51,10 @@ public class BoardController : MonoBehaviour, IEventSystemUser
 
     void Update()
     {
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            GameEventSystem.RiseEvent(GameEventType.DisplayPossibleMovesLeftClick, _squares[1]);
-        }
-
-        if (Input.GetButtonDown("Fire2"))
-        {
-            GameEventSystem.RiseEvent(GameEventType.DisplayPossibleMovesRightClick, _squares[3]);
-        }
+        
     }
 
-    public void OnGameEvent(GameEventType type, object obj)
-    {
-    }
+    public void OnGameEvent(GameEventType type, object obj) { }
 }
+
+
