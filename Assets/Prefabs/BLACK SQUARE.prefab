@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1828829264643413652}
   - component: {fileID: 7684630304048114518}
   - component: {fileID: -8043930326503823191}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: BLACK SQUARE
   m_TagString: ClickableSquare
   m_Icon: {fileID: 0}
@@ -108,6 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12a4a1107d0c4ab48a77983b6a467ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occupation: 0
+  status: 0
+  upperSquares: []
+  lowerSquares: []
   material1: {fileID: 2100000, guid: 66addc0fba00b4d45b0c51c4021c4099, type: 2}
   material2: {fileID: 2100000, guid: 86e63e75044c33649944a46fb6125a38, type: 2}
   mesh: {fileID: 1828829264643413652}

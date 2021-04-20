@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8169585571404347423}
   - component: {fileID: 5725570569646927871}
   - component: {fileID: 522809136167549895}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: white checker
-  m_TagString: Untagged
+  m_TagString: Checker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,3 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c14ee76f22784d91b183aaec13ba917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkerColor: 0
+  materialWhite: {fileID: 2100000, guid: 39f2cb249384b4a82b5638227ae0a289, type: 2}
+  materialBlack: {fileID: 2100000, guid: 06630e4345e224506a8d8ba22a018b89, type: 2}
+  whiteHighlighted: {fileID: 2100000, guid: 2f0f5df1b8e9f4afa9e6756eaa7921f2, type: 2}
+  blackHighlighted: {fileID: 2100000, guid: 37e9730fe94b44e439f142c473ea412f, type: 2}
+  mesh: {fileID: 8169585571404347423}

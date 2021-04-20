@@ -8,6 +8,8 @@ public enum GameEventType
     ClearHighlight,
     ChangePlayerTurn,
     GameFlowStatusUpdated,
+    MoveChecker,
+    UpdateSquareStatus,
 }
 public interface IEventSystemUser {
     void OnGameEvent(GameEventType type, object parameter);

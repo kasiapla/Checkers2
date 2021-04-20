@@ -3,11 +3,14 @@
 public class HumanPlayerController : MonoBehaviour
 {
     [SerializeField] LayerMask _layerSquares;
+    [SerializeField] LayerMask _layerCheckers;
+    Square clickedSquare;
+    Checker clickedChecker;
 
     void Update()
     {
+        ClickChecker();
         ClickSquare();
-        EndTurn();
     }
 
     public void ClickSquare()
@@ -15,20 +18,37 @@ public class HumanPlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, _layerSquares))
             {
-                GameEventSystem.RiseEvent(GameEventType.ClearHighlight);
-                if (hit.transform.gameObject.layer == _layerSquares)
+                if (hit.transform.gameObject.tag == "ClickableSquare")
                 {
-                    GameEventSystem.RiseEvent(GameEventType.DisplayPossibleMoves, hit.collider?.GetComponent<Square>());
+                    clickedSquare = hit.collider?.GetComponent<Square>();
+                    if (clickedSquare.IsHighlighted) clickedChecker.MoveChecker(clickedSquare);
+                    else GameEventSystem.RiseEvent(GameEventType.ClearHighlight);
+                }
+
+                if (hit.transform.gameObject.tag == "WhiteSquare")
+                {
+                   GameEventSystem.RiseEvent(GameEventType.ClearHighlight);
                 }
             }
         }
     }
 
-    public void EndTurn()
+    void ClickChecker()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) GameEventSystem.RiseEvent(GameEventType.ChangePlayerTurn);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, _layerCheckers))
+            {
+                if (hit.transform.gameObject.tag == "Checker")
+                {
+                    clickedChecker = hit.collider?.GetComponent<Checker>();
+                    GameEventSystem.RiseEvent(GameEventType.DisplayPossibleMoves, clickedChecker.CurrentSquare);
+                }
+            }
+        }
     }
 }
 

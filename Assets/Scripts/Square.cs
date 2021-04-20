@@ -16,7 +16,7 @@ public enum SquareStatus
     BlackPromotion
 }
 
-public class Square : MonoBehaviour
+public class Square : MonoBehaviour, IEventSystemUser
 {
     [SerializeField] private SquareOccupation occupation;
     [SerializeField] private SquareStatus status;
@@ -25,6 +25,7 @@ public class Square : MonoBehaviour
     [SerializeField] private Material material1;
     [SerializeField] private Material material2;
     [SerializeField] private MeshRenderer mesh;
+    bool _isHighlighted = false;
 
     public SquareOccupation Occupation
     {
@@ -40,14 +41,20 @@ public class Square : MonoBehaviour
     {
         get { return lowerSquares; }
     }
+    public bool IsHighlighted
+    {
+        get { return _isHighlighted; }
+    }
     public void ChangeSquareColor()
     {
         mesh.material = material2;
+        _isHighlighted = true;
     }
 
     public void TurnHighlightOff()
     {
         mesh.material = material1;
+        _isHighlighted = false;
     }
 
     public void CheckForChecker()
@@ -60,4 +67,21 @@ public class Square : MonoBehaviour
                 break;
         }
     }
+
+    public void OnGameEvent(GameEventType type, object obj)
+    {
+
+    }
+
+    public void MarkAsFree()
+    {
+        occupation = SquareOccupation.Free;
+    }
+
+    public void MarkAsOccupied(CheckerColor checkerColor)
+    {
+        if (checkerColor == CheckerColor.White) occupation = SquareOccupation.WhiteCheckerOn;
+        else occupation = SquareOccupation.BlackCheckerOn;
+    }
+
 }

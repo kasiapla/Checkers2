@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ClickableSquare
+  - Checker
+  - WhiteSquare
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - Squares
   - Water
   - UI
-  - 
+  - Checkers
   - 
   - 
   - 
