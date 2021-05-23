@@ -9,6 +9,7 @@ public class Tween
     public Vector3 speed;
     public float movementTime;
     public Transform objectToMove;
+    //tutaj dodać delegate
 
     public void MoveObject()
     {
@@ -36,6 +37,7 @@ public class TweenManager : MonoBehaviour
             {
                 if (tweensList[i].objectToMove == null || tweensList[i].movementTime <= 0)
                 {
+                    //tu wywołać delegate
                     tweens.Remove(tweensList[i]);
                     continue;
                 }

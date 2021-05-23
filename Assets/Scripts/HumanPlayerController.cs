@@ -53,3 +53,4 @@ public class HumanPlayerController : MonoBehaviour
 }
 
 
+//dodac statyczna metode ktora przyjmuje true/false i włącza/wyłącza ten skrypt

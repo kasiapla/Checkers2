@@ -65,8 +65,9 @@
     <Compile Include="Assets/Scripts/GameEventSystem.cs" />
     <Compile Include="Assets/Scripts/GameFlow.cs" />
     <Compile Include="Assets/Scripts/HumanPlayerController.cs" />
-    <Compile Include="Assets/Scripts/TweenManager.cs" />
     <Compile Include="Assets/Scripts/GameMaster.cs" />
+    <Compile Include="Assets/Scripts/TweenManager.cs" />
+    <Compile Include="Assets/Scripts/Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
